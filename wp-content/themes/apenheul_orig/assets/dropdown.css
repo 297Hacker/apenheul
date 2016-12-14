@@ -1,0 +1,41 @@
+
+
+.container nav ul li {
+    position:relative;
+    display:block;
+    cursor:pointer;
+}
+.container nav ul li:hover ul {
+
+    display:block;
+}
+.container nav ul li ul {
+    padding-left:3px;
+    display:none;
+    position:absolute;
+    list-style: none;
+    /*background: #000000;*/
+    /*opacity: 0.5;*/
+    top:25px;
+    padding-top:5px;
+    z-index:2000;
+}
+.container nav ul li ul div.dropdownbg {
+    position:absolute;background-color:#000000;top:41px;bottom:0px;left:0px;right:0px;opacity:0.5;
+}
+
+
+.container nav ul li ul li {
+    /*background: #000000;*/
+    opacity: 0.5;
+    padding:10px;
+    display:block;
+
+}
+.container nav ul li ul li:hover {
+    opacity: 1;
+}
+
+.review_img {
+    z-index:-100;
+}

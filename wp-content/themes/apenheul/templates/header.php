@@ -1,0 +1,98 @@
+<?php global $virtue; ?>
+<header class="banner headerclass">
+    <meta name="viewport" content="width=device-width" />
+<?php
+    if (kadence_display_topbar()) :
+      get_template_part('templates/header', 'topbar'); 
+    endif; 
+  
+    if(isset($virtue['logo_layout'])) {
+      if($virtue['logo_layout'] == 'logocenter') {
+        $logocclass = 'col-md-12';
+        $menulclass = 'col-md-12';
+      } else if($virtue['logo_layout'] == 'logohalf') {
+        $logocclass = 'col-md-6'; 
+        $menulclass = 'col-md-6';
+      } else {
+        $logocclass = 'col-md-1'; 
+        $menulclass = 'col-md-9';
+      } 
+    } else {
+      $logocclass = 'col-md-1';
+      $menulclass = 'col-md-9'; 
+    }?>
+<div class="header_fullwidth"></div>    
+<div class="container">
+<div class="standard_page_width">
+  <div class="row">
+      <div class="<?php echo esc_attr($logocclass); ?> clearfix kad-header-left">
+           <div id="logo" class="logocase">
+              <a class="brand logofont" href="<?php echo home_url(); ?>/">
+                <?php if (!empty($virtue['x1_virtue_logo_upload']['url'])) { ?>
+                  <a href="/"><div id="thelogo">
+                    <img src="<?php echo esc_url($virtue['x1_virtue_logo_upload']['url']); ?>" alt="<?php bloginfo('name');?>" class="kad-standard-logo" />
+                    <?php if(!empty($virtue['x2_virtue_logo_upload']['url'])) {?>
+                    <img src="<?php echo esc_url($virtue['x2_virtue_logo_upload']['url']);?>" alt="<?php bloginfo('name');?>" class="kad-retina-logo" style="max-height:<?php echo esc_attr($virtue['x1_virtue_logo_upload']['height']);?>px" /> <?php } ?>
+                  </div></a>
+                <?php } else { 
+                    echo apply_filters('kad_site_name', get_bloginfo('name')); 
+                  } ?>
+              <?php if (isset($virtue['logo_below_text']) && !empty($virtue['logo_below_text'])) { ?>
+                <p class="kad_tagline belowlogo-text"><?php echo $virtue['logo_below_text']; ?></p>
+              <?php }?>
+           </div></a> <!-- Close #logo -->
+       </div><!-- close logo span -->
+       <?php if (has_nav_menu('primary_navigation')) : ?>
+         <div class="<?php echo esc_attr($menulclass); ?> kad-header-right">
+           <nav id="nav-main" class="clearfix">
+              <?php wp_nav_menu(array('theme_location' => 'primary_navigation', 'menu_class' => 'sf-menu')); ?>
+               <a href="/duurzaamheid/"><div id="duurzaam_icon"><img src="/wp-content/uploads/2016/12/natuurlijk_duurzaam.png"/></div></a>
+          </div> <!-- Close menuclass-->
+           </nav> <!--  close DUURZAAMLOGO --> 
+        <?php endif; ?>
+         <?php if (has_nav_menu('mobile_navigation')) : ?>
+           <div id="mobile-nav-trigger" class="nav-trigger">
+              <button class="nav-trigger-case mobileclass collapsed" data-toggle="collapse" data-target=".kad-nav-collapse">
+                <span class="kad-navbtn"><i class="my_icon"><img src="/wp-content/uploads/2016/09/bars.png" style="margin-top:10px; display: block!important;"/></i></span>
+                <span class="kad-menu-name"><?php echo __('Menu', 'virtue'); ?></span>
+              </button>
+            </div>
+            <div id="kad-mobile-nav" class="kad-mobile-nav" style="background: rgba(0,0,0,.5)!important;">
+              <div class="kad-nav-inner mobileclass">
+                <div class="kad-nav-collapse">
+                <?php if(isset($virtue['mobile_submenu_collapse']) && $virtue['mobile_submenu_collapse'] == '1') {
+                    wp_nav_menu( array('theme_location' => 'mobile_navigation','items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>', 'menu_class' => 'kad-mnav', 'walker' => new kadence_mobile_walker()));
+                  } else {
+                    wp_nav_menu( array('theme_location' => 'mobile_navigation','items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>', 'menu_class' => 'kad-mnav')); 
+                  } ?>
+               </div>
+            </div>
+          </div>   
+  <?php  endif; ?>         
+    </div>
+    <img id="below_logo" src="/wp-content/uploads/2016/09/img_evenementen.png"/>
+  </div><!-- Close Row -->
+  </div>
+</div> <!-- Close Container -->
+  <?php do_action('kt_before_secondary_navigation'); 
+    
+  if (has_nav_menu('secondary_navigation')) : ?>
+  <section id="cat_nav" class="navclass">
+    <div class="container">
+      <nav id="nav-second" class="clearfix">
+        <?php wp_nav_menu(array('theme_location' => 'secondary_navigation', 'menu_class' => 'sf-menu')); ?>
+      </nav>
+    </div><!--close container-->
+  </section>
+  <?php endif;
+  if (!empty($virtue['virtue_banner_upload']['url'])) { 
+    $banner_image = apply_filters('kt_banner_image', $virtue['virtue_banner_upload']['url']); ?>
+
+     <div class="container">
+        <div class="virtue_banner" style:float=left;>
+          <img alt="" src="<?php echo esc_url($banner_image); ?>" />
+        </div>
+      </div>
+  <?php } ?>
+
+</header>
