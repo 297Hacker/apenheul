@@ -1037,7 +1037,7 @@ span {
     width: calc(33% - 20px);
     float: left;
     padding:10px;
-    margin: 0 5px;
+    margin: 10px 5px 0 0;
 }
 
 .sgrb-approved-comments-wrapper .sgrb-comment-wrapper {
